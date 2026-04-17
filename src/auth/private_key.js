@@ -1,0 +1,2 @@
+const private_key = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890CZFZZFCCCVALIDATIONKEY";
+module.exports = private_key

@@ -23,21 +23,20 @@ const authMdlr = (req, res, next) => {
     const token = parts[1];
 
     jwt.verify(token, private_key, (error, decodedToken) => {
+        console.log("error =", error);
+        console.log("decodedToken =", decodedToken);
         if (error) {
             return res.status(401).json({
                 message: "L'utilisateur n'est pas autorisé à accéder à cette ressource.",
                 data: error
             });
         }
-
-        req.auth = { userId: decodedToken.userId };
-
-        if (req.body.userId && req.body.userId !== req.auth.userId) {
+        if (!decodedToken || !decodedToken.idUser) {
             return res.status(401).json({
-                message: "L'identifiant de l'utilisateur n'est pas valide."
+                message: "Token invalide : userId manquant"
             });
         }
-
+        req.auth = { userId: decodedToken.idUser };
         next();
     });
 };

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const User = require('../../models/user-model');
+const User = require('../../models/user-model.js');
 const createFirstUser = async () => {
 
     const hash = await bcrypt.hash('pikachu', 10);
